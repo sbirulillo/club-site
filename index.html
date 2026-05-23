@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Future Club — Hack Club</title>
+  <meta name="description" content="Future Club è un hackclub dove ragazzi appassionati di tecnologia si incontrano, imparano e costruiscono insieme.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+</head>
+<body>
+
+  <!-- Navbar iniettata da components.js -->
+  <div id="navbar"></div>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__inner">
+        <span class="hero__tag">&#x26A1; Hack Club</span>
+
+        <h1 class="hero__title">
+          Future Club<br>
+          <span class="accent" data-typed data-strings="progettiamo.|impariamo.|ci divertiamo.">futuro.</span>
+        </h1>
+
+        <p class="hero__subtitle">
+          Future Club è uno spazio per chi ama programmare e imparare sempre cose nuove, dove la creatività non ha limiti.
+          Hackathon, workshop e progetti formativi.
+        </p>
+
+        <div class="hero__actions">
+          <a href="evento.html" class="btn btn-primary">Prossimo evento &rarr;</a>
+          <a href="chi-siamo.html" class="btn btn-secondary">Chi siamo</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ANTEPRIMA EVENTO -->
+    <section class="section--sm">
+      <div class="section__inner">
+        <span class="section__label fade-in">Prossimo evento</span>
+        <div class="event-card fade-in" id="home-event-card">
+          <!-- Popolato da evento-data.js -->
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- MINI CHI SIAMO -->
+    <section class="section">
+      <div class="section__inner">
+        <span class="section__label fade-in">Chi siamo</span>
+        <h2 class="section__title fade-in">Un posto dove le idee<br>diventano realtà</h2>
+        <p class="section__subtitle fade-in">
+          Future Club fa parte della rete globale di Hack Club. Ogni settimana ci ritroviamo
+          per imparare, sperimentare e costruire progetti che contano davvero.
+        </p>
+
+        <div class="features-grid">
+          <div class="card fade-in">
+            <h4>&#x1F9E0; Impara facendo</h4>
+            <p>Niente lezioni frontali. Si impara costruendo progetti reali insieme agli altri.</p>
+          </div>
+          <div class="card fade-in">
+            <h4>&#x1F91D; Community</h4>
+            <p>Un gruppo di persone curiose, collaborative e appassionate di tecnologia.</p>
+          </div>
+          <div class="card fade-in">
+            <h4>&#x1F680; Hackathon</h4>
+            <p>Maratone di coding dove in poche ore si costruisce qualcosa da zero.</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem;" class="fade-in">
+          <a href="chi-siamo.html" class="btn btn-secondary">Scopri di più</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer iniettato da components.js -->
+  <div id="footer"></div>
+
+  <script src="js/evento-data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/animations.js"></script>
+  <script>
+    // Popola la card evento in home dalla fonte di verità
+    document.addEventListener('DOMContentLoaded', () => {
+      const card = document.getElementById('home-event-card');
+      if (!card || typeof eventoData === 'undefined') return;
+
+      const gratuito = eventoData.gratuito
+        ? '<span class="tag">Gratuito</span>'
+        : '';
+
+      card.innerHTML = `
+        <div>
+          <span class="event-card__badge">In arrivo</span>
+          <h3 class="event-card__title">${eventoData.titolo}</h3>
+          <p class="event-card__meta">&#x1F4C5; ${eventoData.data} &nbsp;&#x23F0; ${eventoData.ora} &nbsp;&#x1F4CD; ${eventoData.luogo}</p>
+          <p class="event-card__desc">${eventoData.descrizione}</p>
+          <div style="margin-top:1rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+            ${gratuito}
+          </div>
+        </div>
+        <div>
+          <a href="evento.html" class="btn btn-primary">Scopri &rarr;</a>
+        </div>
+      `;
+    });
+  </script>
+
+</body>
+</html>

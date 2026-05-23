@@ -1,0 +1,10 @@
+Tu sei senor web developer e devi fare un sito vetrina per pubblicizzare il mio hackclub. Il sito deve avere le pagine
+-cosa è l'hackclub (chi siamo) 
+-contatti
+-Home
+-Evento 
+la home, i contatti e chi siamo non deve mai cambiare. sono cose fisse, l'evento in generale, l'hackclub può decidere se modificarla e crearne una nuova, quindi, un anteprima dell'evento deve essere sempre visibile e accessibile dalla home. Visto che sei un senior web developer, suggeriscimi e chiedimi se sono d'accordo nell'aggiungere altre pagine al sito che ritieni siano fondamentali per un sito vetrina. 
+L'hackclub ha già una palette di colori per il logo, è la seguente: 
+#ff00a8 #8700ff 
+L'hackclub a cui devi consegnare il sito conosce html, javascript e css e vogliono metterci mano quindi il codice deve essere ben modulato (non ci devono essere ripetizioni, nessuna confusione a livello di css ( meglio un css globale per definire i tratti del sito (bottoni, navbar, titoli, paragafri ecc..). Il sito deve avere un animazione minimal e fluida. 
+Andiamo in modalità plan. Fammi delle domande finché non sei sicuro all'80% di quello che devi fare, poi presentami il piano e chiedimi se sono d'accordo, altrimenti ne discutiamo ulteriormente  

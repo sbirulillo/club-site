@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evento — Future Club</title>
+  <meta name="description" content="Dettagli sul prossimo evento del Future Club.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .evento-hero-img {
+      width: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-md);
+      border: 1px solid var(--color-border);
+    }
+    .evento-meta-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin: var(--spacing-sm) 0 var(--spacing-md);
+      list-style: none;
+    }
+    .evento-meta-list li {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="navbar"></div>
+
+  <main>
+
+    <section class="section" style="padding-top: calc(var(--spacing-xl) + var(--nav-height));" id="evento-content">
+      <!-- Popolato da evento-data.js -->
+    </section>
+
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/evento-data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/animations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const content = document.getElementById('evento-content');
+      if (!content || typeof eventoData === 'undefined') return;
+
+      const gratuito = eventoData.gratuito
+        ? '<span class="tag">Gratuito</span>'
+        : '<span class="tag">A pagamento</span>';
+
+      const immagine = eventoData.immagine
+        ? `<img class="evento-hero-img fade-in" src="${eventoData.immagine}" alt="Immagine evento">`
+        : '';
+
+      content.innerHTML = `
+        <div class="section__inner">
+          <span class="section__label fade-in">Prossimo evento</span>
+
+          ${immagine}
+
+          <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; margin-bottom:0.5rem;" class="fade-in">
+            <span class="event-card__badge">In arrivo</span>
+            ${gratuito}
+          </div>
+
+          <h1 class="section__title fade-in">${eventoData.titolo}</h1>
+
+          <ul class="evento-meta-list fade-in">
+            <li>&#x1F4C5; ${eventoData.data}</li>
+            <li>&#x23F0; ${eventoData.ora}</li>
+            <li>&#x1F4CD; ${eventoData.luogo}</li>
+            <li>&#x1F465; Posti: ${eventoData.posti}</li>
+          </ul>
+
+          <p style="max-width:65ch; font-size:1rem; line-height:1.8; color:var(--color-muted); margin-bottom:var(--spacing-md);" class="fade-in">
+            ${eventoData.descrizioneCompleta}
+          </p>
+
+          <a href="${eventoData.ctaLink}" class="btn btn-primary fade-in" target="_blank" rel="noopener">
+            ${eventoData.cta} &rarr;
+          </a>
+        </div>
+      `;
+    });
+  </script>
+
+</body>
+</html>

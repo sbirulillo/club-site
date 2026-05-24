@@ -28,7 +28,7 @@ function renderNavbar() {
   el.innerHTML = `
     <nav class="nav">
       <a href="index.html" class="nav__logo" aria-label="Future Club - Home">
-        <img src="logo/logo_nosfondo.png" alt="Future Club logo">
+        <img src="logo/logo_senzasfondo.png" alt="Future Club logo">
       </a>
       <ul class="nav__links" id="nav-links">
         ${links}

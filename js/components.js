@@ -28,8 +28,7 @@ function renderNavbar() {
   el.innerHTML = `
     <nav class="nav">
       <a href="index.html" class="nav__logo" aria-label="Future Club - Home">
-        <img src="logo/logo_white.jpeg" alt="Future Club logo">
-        <span class="nav__logo-text">Future Club</span>
+        <img src="logo/logo_senzasfondo.png" alt="Future Club logo">
       </a>
       <ul class="nav__links" id="nav-links">
         ${links}
@@ -77,3 +76,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderNavbar();
   renderFooter();
 });
+
+

@@ -33,6 +33,115 @@
       font-size: 0.85rem;
       color: var(--color-muted);
     }
+
+    /* Stili Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      animation: slideIn 0.3s ease-in-out;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: var(--spacing-md);
+      right: var(--spacing-md);
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--color-muted);
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: var(--color-text);
+    }
+
+    .modal-header {
+      margin-bottom: var(--spacing-md);
+      padding-right: 2rem;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--color-text);
+    }
+
+    .modal-body {
+      color: var(--color-muted);
+      line-height: 1.8;
+    }
+
+    .modal-body p {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .btn-info {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .btn-info:hover {
+      background: var(--color-border);
+      border-color: var(--color-text);
+    }
   </style>
 </head>
 <body>
@@ -47,12 +156,58 @@
 
   </main>
 
+  <!-- Modal Evento -->
+  <div id="eventoModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Chiudi" onclick="closeEventModal()">&times;</button>
+      <div class="modal-header">
+        <h2>Info Evento</h2>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Contenuto popolato da JavaScript -->
+      </div>
+    </div>
+  </div>
+
   <div id="footer"></div>
 
   <script src="js/evento-data.js"></script>
   <script src="js/components.js"></script>
   <script src="js/animations.js"></script>
   <script>
+    // Funzioni Modal
+    function openEventModal() {
+      const modal = document.getElementById('eventoModal');
+      const modalBody = document.getElementById('modalBody');
+      
+      if (typeof eventoData !== 'undefined') {
+        modalBody.innerHTML = `
+          <p><strong>📅 Data:</strong> ${eventoData.data}</p>
+          <p><strong>⏰ Ora:</strong> ${eventoData.ora}</p>
+          <p><strong>📍 Luogo:</strong> ${eventoData.luogo}</p>
+          <p><strong>👥 Posti disponibili:</strong> ${eventoData.posti}</p>
+          <p><strong>Tipo:</strong> ${eventoData.gratuito ? 'Gratuito' : 'A pagamento'}</p>
+          <hr style="margin: var(--spacing-md) 0; border: none; border-top: 1px solid var(--color-border);">
+          <p>${eventoData.descrizioneCompleta}</p>
+        `;
+      }
+      
+      modal.classList.add('active');
+    }
+
+    function closeEventModal() {
+      const modal = document.getElementById('eventoModal');
+      modal.classList.remove('active');
+    }
+
+    // Chiudi modal cliccando fuori
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('eventoModal');
+      if (e.target === modal) {
+        closeEventModal();
+      }
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
       const content = document.getElementById('evento-content');
       if (!content || typeof eventoData === 'undefined') return;
@@ -89,9 +244,14 @@
             ${eventoData.descrizioneCompleta}
           </p>
 
-          <a href="${eventoData.ctaLink}" class="btn btn-primary fade-in" target="_blank" rel="noopener">
-            ${eventoData.cta} &rarr;
-          </a>
+          <div style="display:flex; gap:1rem; flex-wrap:wrap;" class="fade-in">
+            <a href="${eventoData.ctaLink}" class="btn btn-primary" target="_blank" rel="noopener">
+              ${eventoData.cta} &rarr;
+            </a>
+            <button onclick="openEventModal()" class="btn-info">
+              ℹ️ Dettagli evento
+            </button>
+          </div>
         </div>
       `;
     });
